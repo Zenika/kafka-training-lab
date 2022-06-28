@@ -8,8 +8,8 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HelloKafka {
-  private static final Logger LOG = LoggerFactory.getLogger(HelloKafka.class);
+public class HelloKafkaProducer {
+  private static final Logger LOG = LoggerFactory.getLogger(HelloKafkaProducer.class);
 
   public static void main(String[] args) {
     Properties properties = loadApplicationProperties();
@@ -34,7 +34,7 @@ public class HelloKafka {
   private static Properties loadApplicationProperties() {
     try {
       Properties properties = new Properties();
-      properties.load(HelloKafka.class.getClassLoader().getResourceAsStream("application.properties"));
+      properties.load(HelloKafkaProducer.class.getClassLoader().getResourceAsStream("application.properties"));
       return properties;
     } catch (IOException e) {
       throw new RuntimeException(e);

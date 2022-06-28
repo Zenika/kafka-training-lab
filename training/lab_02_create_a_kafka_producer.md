@@ -7,7 +7,7 @@ Let's write a Kafka producer using Kakfa's java API.
 See the project `producer`. This project contains the code skeleton, it only needs to be completed.
 
 The project contains:
-* A class, [com.zenika.lab.HelloKafka](../producer/src/main/java/com/zenika/lab/HelloKafka.java), that you need to complete.
+* A class, [com.zenika.lab.HelloKafkaProducer](../producer/src/main/java/com/zenika/lab/HelloKafkaProducer.java), that you need to complete.
 * A [build.gradle](../producer/build.gradle) file that contains the dependencies.
 * A [property file](../producer/src/main/resources/application.properties).
 
