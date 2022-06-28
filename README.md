@@ -14,7 +14,8 @@ See [Setup](./training/setup.md)
 ## Labs
 
 1. [Kafka's first steps](./training/lab_01_kafka_first_steps.md)
-1. [Create a Kafka producer](./training/lab_02_create_a_kafka_producer.md)
+2. [Create a Kafka producer](./training/lab_02_create_a_kafka_producer.md)
+3. [Create a Kafka consumer](./training/lab_03_create_a_kafka_consumer.md)
 
 ## Author
 
