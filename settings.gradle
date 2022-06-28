@@ -1,2 +1,3 @@
 rootProject.name = 'kafka-training-lab'
 
+include('producer', 'producer-completed')
