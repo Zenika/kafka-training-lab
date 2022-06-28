@@ -7,7 +7,9 @@ Let's write a Kafka producer using Kakfa's java API.
 See the project `producer`. This project contains the code skeleton, it only needs to be completed.
 
 The project contains:
-* A class, [com.zenika.lab.HelloKafkaProducer](../producer/src/main/java/com/zenika/lab/HelloKafkaProducer.java), that you need to complete.
+
+* A class, [com.zenika.lab.HelloKafkaProducer](../producer/src/main/java/com/zenika/lab/HelloKafkaProducer.java), that you
+  need to complete.
 * A [build.gradle](../producer/build.gradle) file that contains the dependencies.
 * A [property file](../producer/src/main/resources/application.properties).
 
@@ -20,6 +22,7 @@ First, let's add the `kafka-clients` library to the classpath. Add this dependen
 ```groovy
 implementation 'org.apache.kafka:kafka-clients:3.2.0'
 ```
+
 Note that the version corresponds to the Kafka version.
 
 If you are intelliJ, don't forget to reload your gradle environment.
@@ -33,6 +36,7 @@ Using Kafka means setting a lot of properties.
 See the [documentation](https://kafka.apache.org/documentation.html) to have a description of each property.
 
 Add the relevant properties to the `application.properties` file:
+
 * `bootstrap.servers` to set the address of your Kafka cluster
 * `key.serializer` full classpath to specify which serializer you use for the key...
 * `value.serializer` ... and the value
@@ -49,10 +53,11 @@ See [producer-completed](../producer-completed) if you are struggling to find th
 First, to use Kafka, you need to declare a `KafkaProducer`. This producer is thread-safe, and auto-closable.
 It takes some properties as a parameter.
 It is typed for the key, and the value. For this lab, you will use String for both.
+
 ```java
-try(KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(properties)) {
-  
-}
+try(KafkaProducer<String, String> kafkaProducer=new KafkaProducer<>(properties)){
+
+      }
 ```
 
 ### Send the messages
@@ -61,21 +66,26 @@ The goal is to send 100 messages. Each message will have the same key, `hello-wo
 call to the `produceRandomNumber()` helper method.
 
 You'll send 100 messages, so first let's write a `for` loop. Then to send your messages, you'll need to do to things:
+
 * Create a `ProducerRecord<String, String>`
 * Call the `send()` method of the `KafkaProducer`.
 
 The `ProducerRecord` will contain information about the message you are trying to send: the topic, the key, and the value
+
 ```java
-ProducerRecord<String, String> record = new ProducerRecord<>(
-  "topic", "key", "value"
-);
+ProducerRecord<String, String> record=new ProducerRecord<>(
+      "topic","key","value"
+      );
 ```
+
 Replace with the appropriate key and value.
 
 Then, to send the message:
+
 ```java
 kafkaProducer.send(record);
 ```
+
 Note that when the `send` method is called, the message is not yet sent to Kafka. In practice, the message is added to an
 in-memory buffer. The message will be sent alongside other messages to the broker once the batch of messages it belongs
 to is ready (remember `batch.size` and `linger.ms` ?).
@@ -92,12 +102,19 @@ your applicative code. If the exception is `null`, you are certain the record wa
 `RecordMetadata`.
 
 For example, you could use it like this:
+
 ```java
-kafkaProducer.send(record, (metadata, exception) -> {
-  if (exception != null) {
-    LOG.error("Error while sending record {} to Kafka: {}", record.key(), exception);
-  } else {
-    LOG.info("Record {} - {} sent to Kafka", record.key(), record.value());
-  }
-});
+kafkaProducer.send(record,(metadata,exception)->{
+      if(exception!=null){
+      LOG.error("Error while sending record {} to Kafka: {}",record.key(),exception);
+      }else{
+      LOG.info("Record {} - {} sent to Kafka",record.key(),record.value());
+      }
+      });
 ```
+
+### Run the producer
+
+Run the producer using gradle: `./gradlew producer:run`.
+Check [AKHQ](http://localhost:8085). The messages you sent will be in the `hello-world` topic. Check the messages in this
+topic using the 🔎 in AKHQ.
