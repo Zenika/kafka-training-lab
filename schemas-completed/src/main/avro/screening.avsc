@@ -1,0 +1,23 @@
+{
+  "namespace": "com.zenika.labs.movie",
+  "name": "Screening",
+  "doc": "A movie screens at a specific date at a specific cinema",
+  "type": "record",
+  "fields": [
+    {
+      "name": "movieId",
+      "type": "string"
+    },
+    {
+      "name": "screeningDate",
+      "type": {
+        "type": "int",
+        "logicalType": "date"
+      }
+    },
+    {
+      "name": "cinemaId",
+      "type": "string"
+    }
+  ]
+}

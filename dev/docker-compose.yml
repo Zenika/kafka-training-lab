@@ -51,7 +51,7 @@ services:
     image: confluentinc/cp-schema-registry:7.0.0-1-ubi8
     restart: always
     ports:
-      - 28081:8081
+      - 8081:8081
     container_name: schema-registry
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
@@ -69,6 +69,11 @@ services:
       kafka-topics --bootstrap-server kafka:9092 \
         --create \
         --topic "hello-world" \
+        --partitions 3 \
+        --replication-factor 1 ;
+      kafka-topics --bootstrap-server kafka:9092 \
+        --create \
+        --topic "screening" \
         --partitions 3 \
         --replication-factor 1 ;
       true'
