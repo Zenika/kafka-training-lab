@@ -1,0 +1,71 @@
+plugins {
+    id 'java'
+    id 'com.github.davidmc24.gradle.plugin.avro' version '1.3.0'
+}
+
+group 'com.zenika'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.avro:avro:1.11.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs 'src/main/avro'
+        }
+    }
+}
+
+avro {
+    stringType = "CharSequence"
+}
+
+tasks.register("registerSchemas") {
+    doLast {
+        def schemas = [
+                [subject: 'screening-key',
+                 file   : 'screeningId.avsc'],
+                [subject: 'screening-value',
+                 file   : 'screening.avsc']
+        ]
+        schemas.each { schema ->
+            def subject = schema.subject
+            def filename = schema.file
+            def path = project.sourceSets.main.allSource.srcDirs.findAll { it.name.endsWith('avro') }[0].absolutePath
+            def schemaPath = "$path/$filename"
+            def screeningSchema = new File(schemaPath).text.replaceAll('\n', '')
+            def request = [schema: screeningSchema]
+            def requestStr = groovy.json.JsonOutput.toJson(request)
+
+            println "Registering the schema $schemaPath"
+
+            def post = new URL("http://localhost:8081/subjects/$subject/versions").openConnection()
+            post.setRequestMethod('POST')
+            post.setDoOutput(true)
+            post.setRequestProperty('Content-Type', 'application/json')
+            post.setRequestProperty('Accept', 'application/json')
+            post.getOutputStream().write(requestStr.getBytes('UTF-8'))
+            def postRC = post.getResponseCode()
+            def postBody = post.getInputStream().getText()
+
+            if (postRC == 200) {
+                println(postBody)
+            } else {
+                throw new GradleScriptException("Unable to create schema in registry: $postBody")
+            }
+        }
+    }
+}

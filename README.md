@@ -16,6 +16,7 @@ See [Setup](./training/setup.md)
 1. [Kafka's first steps](./training/lab_01_kafka_first_steps.md)
 2. [Create a Kafka producer](./training/lab_02_create_a_kafka_producer.md)
 3. [Create a Kafka consumer](./training/lab_03_create_a_kafka_consumer.md)
+4. [Write the Avro schemas](./training/lab_04_write_the_avro_schemas.md)
 
 ## Author
 
