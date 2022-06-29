@@ -59,9 +59,9 @@ auto.register.schemas=false
 
 ## Change the code
 
-Now, update the code accordingly. You do not need to configure the `KafkaProducer` to use both `String` types. These
-types can be replaced by the types you imported by adding the `project` dependency. Use the classes you generated like
-`ScreeningId` and `Screening` directly.
+Now, update the code accordingly. You need to configure the `KafkaProducer` to use the new classes, not the `String` types.
+These `String` types can be replaced by the types you imported by adding the `project` dependency. Use the classes you
+generated like `ScreeningId` and `Screening` directly.
 
 The `ProducerRecord` will also need to be updated. For each record, create a key and a value. What data you put inside
 the fields is not important:
