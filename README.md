@@ -17,6 +17,7 @@ See [Setup](./training/setup.md)
 2. [Create a Kafka producer](./training/lab_02_create_a_kafka_producer.md)
 3. [Create a Kafka consumer](./training/lab_03_create_a_kafka_consumer.md)
 4. [Write the Avro schemas](./training/lab_04_write_the_avro_schemas.md)
+5. [Create a Kafka Avro producer](./training/lab_05_create_a_kakfa_avro_producer.md)
 
 ## Author
 
