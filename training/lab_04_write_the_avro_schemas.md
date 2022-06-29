@@ -207,3 +207,22 @@ curl -XDELETE \
 ```
 
 Note that you need to run 2 distinct curls to delete the schema: one to do a soft delete, and then one to do a hard delete.
+
+### A matter of subjects
+
+You can see in the previous URL that the REST resource used is `subjects`. What is a subject exactly ? A subject is a
+namespace for a schema. Each namespace maps to multiple versions of a single schema, so it's like the logical identifier of
+the schema.
+
+By default, when you use the Schema Registry, the schemas will be associated with the topic they are used. In this case,
+since the topic name is `screening`, the two subjects that will be used are `screening-key` (schema of the key of the
+messages in the `screening` topic) and `screening-value` (schema of the value of the messages in the `screening` topic).
+This is called the `TopicNameStrategy`, and it is the default strategy in Kafka.
+
+But, sometimes, you will encounter scenarios:
+
+- where some schemas are shared between topics
+- where a topic can contain different schemas
+
+In that case, you can use other strategies. See this article
+for [concrete examples](https://www.confluent.io/blog/put-several-event-types-kafka-topic/).
