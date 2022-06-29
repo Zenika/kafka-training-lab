@@ -19,7 +19,7 @@ public class HelloKafkaProducer {
     Properties properties = loadApplicationProperties();
 
     try (KafkaProducer<ScreeningId, Screening> kafkaProducer = new KafkaProducer<>(properties)) {
-      for (int i = 0; i < 100; i++) {
+      for (int i = 0; i < 5_000_000; i++) {
         var id = ScreeningId.newBuilder().setScreeningId(String.valueOf(produceRandomNumber())).build();
         var screening = Screening.newBuilder()
               .setScreeningId(id.getScreeningId())
