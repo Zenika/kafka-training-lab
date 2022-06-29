@@ -1,0 +1,12 @@
+{
+  "namespace": "com.zenika.labs.movie",
+  "name": "ScreeningId",
+  "doc": "A screening Id",
+  "type": "record",
+  "fields": [
+    {
+      "name": "screeningId",
+      "type": "string"
+    }
+  ]
+}
