@@ -2,6 +2,7 @@ version: '3.8'
 services:
   db:
     image: postgres:14.2-alpine
+    container_name: postgres
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -19,6 +20,9 @@ services:
             local:
               properties:
                 bootstrap.servers: "kafka:9092"
+              connect:
+                - name: "connect"
+                  url: "http://kafka-connect:8083"
               schema-registry:
                 url: "http://schema-registry:8081"
     ports:
@@ -77,3 +81,37 @@ services:
         --partitions 3 \
         --replication-factor 1 ;
       true'
+
+  kafka-connect:
+    build: ./kafka-connect
+    hostname: kafka-connect-1
+    restart: on-failure
+    ports:
+      - 8083:8083
+    depends_on:
+      - kafka
+    healthcheck:
+      test: test `curl -s -o /dev/null -w "%{http_code}" http://localhost:8083/connectors` = 200
+      interval: 2s
+      timeout: 2s
+      retries: 10
+      start_period: 2s
+    environment:
+      - CONNECT_BOOTSTRAP_SERVERS=kafka:9092
+      - CONNECT_REST_PORT=8083
+      - CONNECT_GROUP_ID=connect
+      - CONNECT_CONFIG_STORAGE_TOPIC=connect-config
+      - CONNECT_OFFSET_STORAGE_TOPIC=connect-offsets
+      - CONNECT_STATUS_STORAGE_TOPIC=connect-status
+      - CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=1
+      - CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=1
+      - CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=1
+      - CONNECT_KEY_CONVERTER=io.confluent.connect.avro.AvroConverter
+      - CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL=http://schema-registry:8081
+      - CONNECT_VALUE_CONVERTER=io.confluent.connect.avro.AvroConverter
+      - CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL=http://schema-registry:8081
+      - CONNECT_REST_ADVERTISED_HOST_NAME=kafka-connect-1
+      - CONNECT_PLUGIN_PATH=/usr/share/java
+      - CONNECT_CONNECTOR_CLIENT_CONFIG_OVERRIDE_POLICY=All
+      - CONNECT_HEAP_OPTS="-Xmx512M -Xms512M"
+    container_name: kafka-connect

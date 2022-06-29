@@ -1,0 +1,14 @@
+{
+  "name": "Screening-Connector-Avro",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.url": "jdbc:postgresql://postgres:5432/postgres",
+    "connection.user": "postgres",
+    "connection.password": "postgres",
+    "insert.mode": "upsert",
+    "pk.mode": "record_key",
+    "pk.field": "screeningId",
+    "auto.create": "true",
+    "topics": "screening"
+  }
+}
