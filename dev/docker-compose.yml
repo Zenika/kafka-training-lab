@@ -10,7 +10,7 @@ services:
       - '5432:5432'
 
   akhq:
-    image: tchiotludo/akhq:0.15.0
+    image: tchiotludo/akhq:0.21.0
     container_name: akhq
     environment:
       AKHQ_CONFIGURATION: |

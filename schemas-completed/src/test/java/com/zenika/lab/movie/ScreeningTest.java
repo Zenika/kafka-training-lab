@@ -10,6 +10,7 @@ public class ScreeningTest {
   @Test
   void canGenerateScreening() {
     Screening.newBuilder()
+          .setScreeningId("123")
           .setMovieId("123")
           .setCinemaId("123")
           .setScreeningDate(LocalDate.of(2022, Month.AUGUST, 10))

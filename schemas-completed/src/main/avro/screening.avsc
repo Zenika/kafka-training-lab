@@ -5,6 +5,10 @@
   "type": "record",
   "fields": [
     {
+      "name": "screeningId",
+      "type": "string"
+    },
+    {
       "name": "movieId",
       "type": "string"
     },
