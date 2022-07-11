@@ -37,7 +37,10 @@ bin/
 /.nb-gradle/
 
 ### VS Code ###
-.vscode/
 
 ### Mac OS ###
 .DS_Store
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
