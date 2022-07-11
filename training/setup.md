@@ -10,7 +10,7 @@
 Add the following to your host:
 
 ```text
-127.0.0.1 Kafka
+127.0.0.1 kafka
 127.0.0.1 schema-registry
 ```
 
@@ -28,8 +28,10 @@ Open the project using IntelliJ. It should detect a gradle multi-project build. 
 installed,
 it's included in this project.
 
-Let's do a proper health check: `./gradlew build` (if you are on windows, the command should be something along `gradlew.bat build`).
+Let's do a proper health check: `./gradlew build` (if you are on windows, the command should be something
+along `gradlew.bat build`).
 You should see something like this:
+
 ```shell
 BUILD SUCCESSFUL in 3s
 ```
