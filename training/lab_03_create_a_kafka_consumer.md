@@ -72,7 +72,7 @@ this infinite loop.
 
 Then, you need to actually request the next messages using the `poll()` method from the `KafkaConsumer` class.
 The `poll()` method doesn't actually send a request to the cluster immediately. Instead, it sends several parallel `fetch`
-requests to several brokers of the cluster. Each fetch request will come back with a certain number of messages accross
+requests to several brokers of the cluster. Each fetch request will come back with a certain number of messages across
 several partitions for the subscribed topics.
 
 The method `poll()` returns `KafkaRecords`, a list of records. Order of these records is preserved in a single partition.
