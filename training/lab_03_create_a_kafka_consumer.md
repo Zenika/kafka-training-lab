@@ -62,7 +62,7 @@ Since a consumer can subscribe to multiple topics at once, you can either use a 
 `java.util.regex.Pattern`.
 This can be useful, especially if you have to consume an unknown number of topics. Instead of
 writing `consumer.subscribe(List.of("order_fr", "order_es", "order_de", ...))`
-you can write `consumer.subscribe(Pattern.compile("order"))`.
+you can write `consumer.subscribe(Pattern.compile("order*"))`.
 
 ### Consume the messages
 
