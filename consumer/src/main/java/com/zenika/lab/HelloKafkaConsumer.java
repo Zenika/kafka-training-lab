@@ -12,9 +12,7 @@ public class HelloKafkaConsumer {
   public static void main(String[] args) {
     Properties properties = loadApplicationProperties();
 
-    // Write a Kafka Producer that sends 100 records
-    // Each record should have the key "hello" and a generated value converted to string
-    // See helper method produceRandomNumber()
+    // Write a Kafka Consumer that consumes and logs all records
   }
 
   private static Properties loadApplicationProperties() {
