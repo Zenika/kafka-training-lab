@@ -77,7 +77,7 @@ several partitions for the subscribed topics.
 
 The method `poll()` returns `KafkaRecords`, a list of records. Order of these records is preserved in a single partition.
 
-One last thing. The `poll()` methods accepts an argument, a Duration, which is the time the method will block is no
+One last thing. The `poll()` methods accepts an argument, a Duration, which is the time the method will block if no
 records are available. In order to avoid spamming the cluster in case no messages are available, set it to a low value
 like 200 ms.
 
