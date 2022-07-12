@@ -5,6 +5,7 @@
     "connection.url": "jdbc:postgresql://postgres:5432/postgres",
     "connection.user": "postgres",
     "connection.password": "postgres",
+    "tasks.max": 3,
     "insert.mode": "upsert",
     "pk.mode": "record_key",
     "pk.field": "screeningId",

@@ -80,6 +80,11 @@ services:
         --topic "screening" \
         --partitions 3 \
         --replication-factor 1 ;
+      kafka-topics --bootstrap-server kafka:9092 \
+        --create \
+        --topic "screening-from-db" \
+        --partitions 3 \
+        --replication-factor 1 ;
       true'
 
   kafka-connect:

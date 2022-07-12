@@ -1,0 +1,19 @@
+{
+  "name": "Screening-Connector-Avro-Source",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "connection.url": "jdbc:postgresql://postgres:5432/postgres",
+    "connection.user": "postgres",
+    "connection.password": "postgres",
+    "tasks.max": 1,
+    "mode": "bulk",
+    "incrementing.column.name": "screeningId",
+    "table.whitelist": "screening",
+    "transforms": "router,key",
+    "transforms.router.type": "org.apache.kafka.connect.transforms.RegexRouter",
+    "transforms.router.regex": "(.*)",
+    "transforms.router.replacement": "screening-from-db",
+    "transforms.key.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.key.fields": "screeningId"
+  }
+}
