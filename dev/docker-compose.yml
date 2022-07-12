@@ -44,6 +44,8 @@ services:
       KAFKA_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
       KAFKA_LOG_RETENTION_HOURS: 1
 
@@ -74,6 +76,11 @@ services:
       kafka-topics --bootstrap-server kafka:9092 \
         --create \
         --topic "screening" \
+        --partitions 3 \
+        --replication-factor 1 ;
+      kafka-topics --bootstrap-server kafka:9092 \
+        --create \
+        --topic "screening-2" \
         --partitions 3 \
         --replication-factor 1 ;
       true'

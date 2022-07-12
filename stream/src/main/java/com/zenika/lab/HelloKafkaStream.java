@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import org.apache.kafka.common.serialization.Serde;
-import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.Topology;
@@ -29,14 +28,13 @@ public class HelloKafkaStream {
     final Serde<Screening> valueSpecificAvroSerde = new SpecificAvroSerde<>();
     valueSpecificAvroSerde.configure(serdeConfig, false);
 
-    Serde<String> stringSerde = Serdes.String();
     StreamsBuilder builder = new StreamsBuilder();
     builder
-          .stream("screening", Consumed.with(stringSerde, stringSerde))
+          .stream("screening", Consumed.with(keySpecificAvroSerde, valueSpecificAvroSerde))
           //.peek((k,v) -> logger.info("Observed event: {}", v))
           //.mapValues(s -> s.toUpperCase())
           //.peek((k,v) -> logger.info("Transformed event: {}", v))
-          .to("screening-uppercase", Produced.with(stringSerde, stringSerde));
+          .to("screening-2", Produced.with(keySpecificAvroSerde, valueSpecificAvroSerde));
     return builder.build();
   }
 
