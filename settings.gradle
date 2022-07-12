@@ -1,4 +1,5 @@
 rootProject.name = 'kafka-training-lab'
 
 include('producer', 'producer-completed', 'consumer', 'consumer-completed', 'schemas', 'schemas-completed',
-        'screening-producer', 'screening-producer-completed', 'website-consumer', 'website-consumer-completed')
+        'screening-producer', 'screening-producer-completed', 'website-consumer', 'website-consumer-completed',
+        'stream')

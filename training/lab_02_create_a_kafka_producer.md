@@ -8,7 +8,7 @@ See the project `producer`. This project contains the code skeleton, it only nee
 
 The project contains:
 
-* A class, [com.zenika.lab.HelloKafkaProducer](../producer/src/main/java/com/zenika/lab/HelloKafkaProducer.java), that you
+* A class, [com.zenika.lab.HelloKafkaStream](../producer/src/main/java/com/zenika/lab/HelloKafkaProducer.java), that you
   need to complete.
 * A [build.gradle](../producer/build.gradle) file that contains the dependencies.
 * A [property file](../producer/src/main/resources/application.properties).
